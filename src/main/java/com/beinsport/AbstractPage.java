@@ -106,11 +106,15 @@ public class AbstractPage {
     }
 
     public void waitLoaderBox(int time) {
-
+        System.out.println("in waitLoaderBox");
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        if (driver.findElements(By.xpath("//div[starts-with(@id,'loading')]")).size() != 0) {
+
+        //if (driver.findElements(By.xpath("//div[starts-with(@class,'loading-main loading')]")).size() != 0) {
+        if (driver.findElements(By.cssSelector("[id='loading']")).size() != 0) {
             driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
-            driver.findElement(By.xpath("//div[@id='loading' and @style='display: none;']"));
+            driver.findElement(By.xpath("//*[@id='loading' and @style='display: none;' and @data-was-processed='true']"));
+            //*[@id="loading" and @style='display: none;']
+            //*[@id="loading" and @data-was-processed="true"]
             //driver.findElement(By.xpath("//div[@class='loader-box' and @style='display: none;']"));
             log.info("Waiting For Loader Box!");
             System.out.println("Waiting For Loader Box!");
@@ -136,6 +140,7 @@ public class AbstractPage {
     protected void click(WebElement element) throws InterruptedException {
 
         try {
+
             element.click();
         } catch (Exception e) {
             log.error("Error while clicking webelement : " + e);

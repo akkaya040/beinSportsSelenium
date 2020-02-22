@@ -44,13 +44,17 @@ public class CustomerTransactions {
         PaymentPage paymentPage = new PaymentPage(driver.get());
         SubscribePage subscribePage = new SubscribePage(driver.get());
 
+        int expectedPackageCount = 4;
+        String expectedPackageName = "";
+
         landingPage
                 .navigateToUrl()
                 .controlSubsciptionButton()
                 .clickToSubsciptionButton();
 
         subscribePage
-                .controlIsPackageExist();
+                .controlPackages(expectedPackageCount)
+                .controlIsPackageExist(expectedPackageName);
 
 
 

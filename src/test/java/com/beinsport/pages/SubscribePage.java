@@ -25,14 +25,11 @@ public class SubscribePage extends AbstractPage {
                 ,"Packages are exist. Count: "+ expectedPackageCount
                 ,"Packages count is not equal to expectedValue!");
 
-
-
-
         return this;
     }
 
 
-    public SubscribePage controlIsPackageExist() {
+    public SubscribePage controlIsPackageExist(String expectedPackageName) {
 
 
 
