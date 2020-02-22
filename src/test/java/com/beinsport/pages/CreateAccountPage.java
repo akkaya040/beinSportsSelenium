@@ -12,10 +12,4 @@ public class CreateAccountPage extends AbstractPage {
     }
 
 
-
-
-
-
-
-
 }

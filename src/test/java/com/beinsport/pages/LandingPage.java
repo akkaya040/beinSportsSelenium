@@ -16,7 +16,6 @@ public class LandingPage extends AbstractPage {
     }
 
 
-
     public LandingPage navigateToUrl() {
         String navigateURL = "https://connect-th.beinsports.com/en";
         log.info("Test is going to URL: " + navigateURL);
@@ -43,8 +42,8 @@ public class LandingPage extends AbstractPage {
         System.out.println("Control: is Button Exist");
 
         control(isElementExist(LandingPageObj.btnSubscribe)
-                ,"Subsciption Button is found."
-                ,"Subsciption Button is not exist!");
+                , "Subsciption Button is found."
+                , "Subsciption Button is not exist!");
 
         System.out.println("Success: Button is Exist");
         return this;

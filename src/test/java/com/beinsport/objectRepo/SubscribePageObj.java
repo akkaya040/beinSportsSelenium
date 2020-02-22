@@ -9,5 +9,4 @@ public class SubscribePageObj {
     public static final By packages = By.cssSelector("[class='subscription-package open']");
 
 
-
 }

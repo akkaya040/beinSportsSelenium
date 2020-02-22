@@ -46,6 +46,8 @@ public class CustomerTransactions {
 
         int expectedPackageCount = 4;
         String expectedPackageName = "Monthly Pass with One Week Free Trial";
+        String expectedPrice = "฿99";
+
 
         landingPage
                 .navigateToUrl()
@@ -54,7 +56,10 @@ public class CustomerTransactions {
 
         subscribePage
                 .controlPackages(expectedPackageCount)
+                .validatePackagePrice(expectedPrice)
                 .clickToPackage(expectedPackageName);
+
+        //createAccountPage
 
 
 

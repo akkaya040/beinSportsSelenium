@@ -10,20 +10,21 @@ import java.util.List;
 public class SubscribePage extends AbstractPage {
 
     public WebDriver driver;
+
     //Abstracter
     public SubscribePage(WebDriver driver) {
         super(driver);
-        this.driver=driver;
+        this.driver = driver;
 
     }
 
-    public SubscribePage controlPackages(int expectedPackageCount){
+    public SubscribePage controlPackages(int expectedPackageCount) {
 
-        List<WebElement> packages =  findElements(SubscribePageObj.packages);
+        List<WebElement> packages = findElements(SubscribePageObj.packages);
 
         control(packages.size() == expectedPackageCount
-                ,"Packages are exist. Count: "+ expectedPackageCount
-                ,"Packages count is not equal to expectedValue!");
+                , "Packages are exist. Count: " + expectedPackageCount
+                , "Packages count is not equal to expectedValue!");
 
         return this;
     }
@@ -31,15 +32,34 @@ public class SubscribePage extends AbstractPage {
 
     public SubscribePage clickToPackage(String expectedPackageName) {
 
-        List<WebElement> packages =  findElements(SubscribePageObj.packages);
+        List<WebElement> packages = findElements(SubscribePageObj.packages);
 
-        for(int i=0; i<packages.size();i++){
-            if(packages.get(i).getText().contains(expectedPackageName)){
+        for (int i = 0; i < packages.size(); i++) {
+            if (packages.get(i).getText().contains(expectedPackageName)) {
                 packages.get(i).findElement(SubscribePageObj.btnSubscribes).click();
+                break;
             }
 
         }
 
+        return this;
+    }
+
+    public SubscribePage validatePackagePrice(String expectedPrice) {
+
+        List<WebElement> packages = findElements(SubscribePageObj.packages);
+        String price = "";
+
+        for (int i = 0; i < packages.size(); i++) {
+            if (packages.get(i).getText().contains(expectedPrice)) {
+                price = packages.get(i).findElement(SubscribePageObj.txtPrice).getText();
+                break;
+            }
+        }
+
+        control(price.equals(expectedPrice)
+                , "Package price is expectedPrice: " + expectedPrice
+                , "Package price couldn't be verified!");
 
         return this;
     }

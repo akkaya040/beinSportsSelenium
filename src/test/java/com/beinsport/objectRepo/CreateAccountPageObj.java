@@ -12,12 +12,4 @@ public class CreateAccountPageObj {
     public static final By btnCreateAccount = By.cssSelector("[data-text='CREATE ACCOUNT']");
 
 
-
-
-
-
-
-
-
-
 }
