@@ -19,7 +19,7 @@ public class SubscribePage extends AbstractPage {
 
     public SubscribePage controlPackages(int expectedPackageCount){
 
-        List<WebElement> packages =  driver.findElements(SubscribePageObj.packages);
+        List<WebElement> packages =  findElements(SubscribePageObj.packages);
 
         control(packages.size() == expectedPackageCount
                 ,"Packages are exist. Count: "+ expectedPackageCount
@@ -29,9 +29,16 @@ public class SubscribePage extends AbstractPage {
     }
 
 
-    public SubscribePage controlIsPackageExist(String expectedPackageName) {
+    public SubscribePage clickToPackage(String expectedPackageName) {
 
+        List<WebElement> packages =  findElements(SubscribePageObj.packages);
 
+        for(int i=0; i<packages.size();i++){
+            if(packages.get(i).getText().contains(expectedPackageName)){
+                packages.get(i).findElement(SubscribePageObj.btnSubscribes).click();
+            }
+
+        }
 
 
         return this;

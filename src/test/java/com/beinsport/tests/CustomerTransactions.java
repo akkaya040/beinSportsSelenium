@@ -45,7 +45,7 @@ public class CustomerTransactions {
         SubscribePage subscribePage = new SubscribePage(driver.get());
 
         int expectedPackageCount = 4;
-        String expectedPackageName = "";
+        String expectedPackageName = "Monthly Pass with One Week Free Trial";
 
         landingPage
                 .navigateToUrl()
@@ -54,7 +54,7 @@ public class CustomerTransactions {
 
         subscribePage
                 .controlPackages(expectedPackageCount)
-                .controlIsPackageExist(expectedPackageName);
+                .clickToPackage(expectedPackageName);
 
 
 

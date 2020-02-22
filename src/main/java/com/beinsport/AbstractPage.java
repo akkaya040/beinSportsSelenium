@@ -96,9 +96,7 @@ public class AbstractPage {
         try {
             waitLoaderBox(DEFAULT_WAIT_LOADERBOX);// , 40
             Thread.sleep(1000);
-            // driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
-            // wait.until(ExpectedConditions.presenceOfElementLocated(by));
         } catch (Exception e) {
             log.error("Error while waiting until element appears : " + e);
             throw new RuntimeException(e);
