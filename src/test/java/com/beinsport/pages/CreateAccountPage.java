@@ -10,7 +10,7 @@ public class CreateAccountPage extends AbstractPage {
     protected String testCase;
 
     //Abstracter
-    public CreateAccountPage(WebDriver driver,String testCase) {
+    public CreateAccountPage(WebDriver driver, String testCase) {
         super(driver);
         this.driver = driver;
         this.testCase = testCase;
@@ -21,10 +21,10 @@ public class CreateAccountPage extends AbstractPage {
 
         waitLoaderBox(DEFAULT_WAIT);
 
-        sendKeys(CreateAccountPageObj.fieldName,"Kurtulus");
-        sendKeys(CreateAccountPageObj.fieldLastName,"Akkaya");
-        sendKeys(CreateAccountPageObj.fieldEmail,getRandomMail());
-        sendKeys(CreateAccountPageObj.fieldPassword,"Test1234@");
+        sendKeys(CreateAccountPageObj.fieldName, "Kurtulus");
+        sendKeys(CreateAccountPageObj.fieldLastName, "Akkaya");
+        sendKeys(CreateAccountPageObj.fieldEmail, getRandomMail());
+        sendKeys(CreateAccountPageObj.fieldPassword, "Test1234@");
         click(CreateAccountPageObj.chkboxMailing);
 
         LogINFO(testCase + ": Form Fields are filled.");
@@ -34,8 +34,8 @@ public class CreateAccountPage extends AbstractPage {
 
     public CreateAccountPage clickToCreateAccountButton() throws InterruptedException {
 
-            click(CreateAccountPageObj.btnCreateAccount);
-            LogINFO(testCase + ": Clicked to Create Account Button.");
+        click(CreateAccountPageObj.btnCreateAccount);
+        LogINFO(testCase + ": Clicked to Create Account Button.");
 
         return this;
     }

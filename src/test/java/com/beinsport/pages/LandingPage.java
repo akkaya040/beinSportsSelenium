@@ -11,7 +11,7 @@ public class LandingPage extends AbstractPage {
     protected String testCase;
 
     //Abstracter
-    public LandingPage(WebDriver driver,String testCase) {
+    public LandingPage(WebDriver driver, String testCase) {
         super(driver);
         this.driver = driver;
         this.testCase = testCase;
@@ -21,7 +21,7 @@ public class LandingPage extends AbstractPage {
     public LandingPage navigateToUrl() {
         String navigateURL = "https://connect-th.beinsports.com/en";
         log.info("Test is going to URL: " + navigateURL);
-        LogINFO(testCase+": Test is going to URL-> " + navigateURL);
+        LogINFO(testCase + ": Test is going to URL-> " + navigateURL);
         System.out.println("Test is going to URL: " + navigateURL);
         navigateTo(navigateURL);
 

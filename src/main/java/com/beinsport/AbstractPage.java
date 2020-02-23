@@ -3,15 +3,11 @@ package com.beinsport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -39,7 +35,6 @@ public class AbstractPage {
     public WebDriver getAbstractDriver() {
         return this.driver;
     }
-
 
     public void navigateTo(String url) {
         try {
@@ -92,7 +87,6 @@ public class AbstractPage {
         }
         return webElements;
     }
-
 
     protected void untilElementAppear(By by) {
 
@@ -186,6 +180,44 @@ public class AbstractPage {
         }
     }
 
+    protected String getTextOfElement(By by, int... index) throws InterruptedException {
+
+        String text = null;
+
+        try {
+
+            if (index.length == 0)
+                text = driver.findElement(by).getText();
+            else
+                text = driver.findElements(by).get(index[0]).getText();
+
+        } catch (Exception e) {
+
+            log.error("Error while getting text of element : " + e);
+            LogFAIL("Error while getting text of element : " + e);
+
+            throw new RuntimeException(e);
+        }
+        return text;
+    }
+
+    protected void selectCombobox(By by, String value) throws InterruptedException {
+        WebElement element = findElement(by);
+        String elemText = "";
+        try {
+            if (element.isEnabled()) {
+                    elemText = element.getText();
+                Select selectBox = new Select(findElement(by));
+                selectBox.selectByValue(value);
+            }
+            LogPASS("Selected : " + value + " - SelectComboBox : " + elemText);
+        } catch (Exception e) {
+            log.error("Error while filling field : " + value + " - " + e);
+            LogFAIL("Error while filling field : " + value + " - " + e);
+
+            throw new RuntimeException(e);
+        }
+    }
 
     protected boolean isElementExist(By by) {
         return isElementExist(by, 15);
@@ -213,15 +245,22 @@ public class AbstractPage {
         return head + rand + tail ;
     }
 
+    public String getAlertAndAccept() throws InterruptedException {
+
+        Alert alert = driver.switchTo().alert();
+        String alertText = alert.getText();
+        alert.accept();
+        LogINFO("Chrome Alert Accepted.");
+        return alertText;
+    }
+
 
     public void control(boolean statement, String onTrue, String onFalse) {
 
         if (statement == true) {
-            System.out.println(onTrue);
             LogPASS(onTrue);
         } else {
             LogFAIL(onFalse);
-            System.out.println(onFalse);
             Assert.assertTrue(false);
         }
     }
