@@ -3,6 +3,7 @@ package com.beinsport.pages;
 import com.beinsport.AbstractPage;
 import com.beinsport.objectRepo.CreateAccountPageObj;
 import org.openqa.selenium.WebDriver;
+import sun.net.www.content.text.PlainTextInputStream;
 
 public class CreateAccountPage extends AbstractPage {
 
@@ -17,14 +18,14 @@ public class CreateAccountPage extends AbstractPage {
     }
 
 
-    public CreateAccountPage fillFormFields() throws InterruptedException {
+    public CreateAccountPage fillFormFields(String name,String lastname,String password) throws InterruptedException {
 
         waitLoaderBox(DEFAULT_WAIT);
 
-        sendKeys(CreateAccountPageObj.fieldName, "Kurtulus");
-        sendKeys(CreateAccountPageObj.fieldLastName, "Akkaya");
+        sendKeys(CreateAccountPageObj.fieldName, name);
+        sendKeys(CreateAccountPageObj.fieldLastName, lastname);
         sendKeys(CreateAccountPageObj.fieldEmail, getRandomMail());
-        sendKeys(CreateAccountPageObj.fieldPassword, "Test1234@");
+        sendKeys(CreateAccountPageObj.fieldPassword, password);
         click(CreateAccountPageObj.chkboxMailing);
 
         LogINFO(testCase + ": Form Fields are filled.");

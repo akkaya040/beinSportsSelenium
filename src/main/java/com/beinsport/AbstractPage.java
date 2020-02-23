@@ -112,7 +112,7 @@ public class AbstractPage {
             //*[@id="loading" and @data-was-processed="true"]
             //driver.findElement(By.xpath("//div[@class='loader-box' and @style='display: none;']"));
             //log.info("Waiting For Loader Box!");
-            System.out.println("Waiting For Loader Box!");
+            //System.out.println("Waiting For Loader Box!");
         }
         driver.manage().timeouts().implicitlyWait(DEFAULT_WAIT, TimeUnit.SECONDS);
     }

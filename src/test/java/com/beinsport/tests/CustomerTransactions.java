@@ -54,6 +54,12 @@ public class CustomerTransactions {
         SubscribePage subscribePage = new SubscribePage(driver.get(), testCase);
         ApiPage apiPage = new ApiPage();
 
+        //User information
+        String name = "Kurtulus";
+        String lastName = "Akkaya";
+        String password = "Test1234@";
+
+        //Expected Scenario Variables
         int expectedPackageCount = 4;
         String expectedPackageName = "Monthly Pass with One Week Free Trial";
         String expectedPrice = "฿99";
@@ -62,6 +68,7 @@ public class CustomerTransactions {
         String expectedFinalPrice = "1.00 THB";
         String expectedPaymentMessage = "This field is not valid.: 'Card number'";
 
+        //CreditCard informations is assumed that variables come from API or somewhere.
         ArrayList<String> creditCard = apiPage.getCreditCard();
 
         landingPage
@@ -75,7 +82,7 @@ public class CustomerTransactions {
                 .clickToPackage(expectedPackageName);
 
         createAccountPage
-                .fillFormFields()
+                .fillFormFields(name,lastName,password)
                 .clickToCreateAccountButton();
 
         paymentPage
