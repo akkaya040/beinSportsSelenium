@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CustomerClickpath" parallel="methods" thread-count="2" verbose="10">
+    <test name="Customer Test Cases">
+        <classes>
+            <class name="com.beinsport.tests.CustomerTransactions" />
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->

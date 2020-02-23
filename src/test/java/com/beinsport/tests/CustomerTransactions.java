@@ -2,6 +2,7 @@ package com.beinsport.tests;
 
 import com.beinsport.ApiPage;
 import com.beinsport.DriverInit;
+import com.beinsport.TestListener;
 import com.beinsport.pages.CreateAccountPage;
 import com.beinsport.pages.LandingPage;
 import com.beinsport.pages.PaymentPage;
@@ -10,10 +11,12 @@ import com.beinsport.pages.SubscribePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
+@Listeners(TestListener.class)
 
 public class CustomerTransactions {
     protected ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();

@@ -101,7 +101,7 @@ public class AbstractPage {
     }
 
     public void waitLoaderBox(int time) {
-        System.out.println("in waitLoaderBox");
+
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
         //if (driver.findElements(By.xpath("//div[starts-with(@class,'loading-main loading')]")).size() != 0) {
@@ -111,7 +111,7 @@ public class AbstractPage {
             //*[@id="loading" and @style='display: none;']
             //*[@id="loading" and @data-was-processed="true"]
             //driver.findElement(By.xpath("//div[@class='loader-box' and @style='display: none;']"));
-            log.info("Waiting For Loader Box!");
+            //log.info("Waiting For Loader Box!");
             System.out.println("Waiting For Loader Box!");
         }
         driver.manage().timeouts().implicitlyWait(DEFAULT_WAIT, TimeUnit.SECONDS);
