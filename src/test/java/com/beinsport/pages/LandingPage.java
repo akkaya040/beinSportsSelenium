@@ -2,23 +2,26 @@ package com.beinsport.pages;
 
 import com.beinsport.AbstractPage;
 import com.beinsport.objectRepo.LandingPageObj;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LandingPage extends AbstractPage {
 
+    protected WebDriver driver;
+    protected String testCase;
+
     //Abstracter
-    public LandingPage(WebDriver driver) {
+    public LandingPage(WebDriver driver,String testCase) {
         super(driver);
-        //setAbstractDriver(driver);
+        this.driver = driver;
+        this.testCase = testCase;
     }
 
 
     public LandingPage navigateToUrl() {
         String navigateURL = "https://connect-th.beinsports.com/en";
         log.info("Test is going to URL: " + navigateURL);
+        LogINFO(testCase+": Test is going to URL-> " + navigateURL);
         System.out.println("Test is going to URL: " + navigateURL);
         navigateTo(navigateURL);
 

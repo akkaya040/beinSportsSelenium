@@ -1,6 +1,5 @@
 package com.beinsport.tests;
 
-import com.beinsport.AbstractPage;
 import com.beinsport.DriverInit;
 import com.beinsport.pages.CreateAccountPage;
 import com.beinsport.pages.LandingPage;
@@ -29,7 +28,9 @@ public class CustomerTransactions {
 
     @Test(enabled = true, description = "Start Stop Browser")
     public void testCase000() throws InterruptedException {
-        LandingPage landingPage = new LandingPage(driver.get());
+        String testCase = new Object() {}.getClass().getEnclosingMethod().getName();
+
+        LandingPage landingPage = new LandingPage(driver.get(),testCase);
         landingPage
                 .navigateToUrl();
 
@@ -38,11 +39,12 @@ public class CustomerTransactions {
 
     @Test(enabled = true, description = "BeinSports Connect Thailand Subscription Test Case")
     public void testCase001() throws InterruptedException {
+        String testCase = new Object() {}.getClass().getEnclosingMethod().getName();
 
-        CreateAccountPage createAccountPage = new CreateAccountPage(driver.get());
-        LandingPage landingPage = new LandingPage(driver.get());
-        PaymentPage paymentPage = new PaymentPage(driver.get());
-        SubscribePage subscribePage = new SubscribePage(driver.get());
+        CreateAccountPage createAccountPage = new CreateAccountPage(driver.get(),testCase);
+        LandingPage landingPage = new LandingPage(driver.get(),testCase);
+        PaymentPage paymentPage = new PaymentPage(driver.get(),testCase);
+        SubscribePage subscribePage = new SubscribePage(driver.get(),testCase);
 
         int expectedPackageCount = 4;
         String expectedPackageName = "Monthly Pass with One Week Free Trial";
@@ -50,18 +52,18 @@ public class CustomerTransactions {
 
 
         landingPage
-                .navigateToUrl()
-                .controlSubsciptionButton()
-                .clickToSubsciptionButton();
+                    .navigateToUrl()
+                    .controlSubsciptionButton()
+                    .clickToSubsciptionButton();
 
         subscribePage
-                .controlPackages(expectedPackageCount)
-                .validatePackagePrice(expectedPrice)
-                .clickToPackage(expectedPackageName);
+                    .controlPackages(expectedPackageCount)
+                    .validatePackagePrice(expectedPrice)
+                    .clickToPackage(expectedPackageName);
 
-        //createAccountPage
-
-
+        createAccountPage
+                    .fillFormFields()
+                    .clickToCreateAccountButton();
 
 
     }
@@ -70,8 +72,8 @@ public class CustomerTransactions {
     @AfterMethod
     public void After() {
         //after method
-        driver.get().close();
-        driver.get().quit();
+        //driver.get().close();
+        //driver.get().quit();
     }
 
 }

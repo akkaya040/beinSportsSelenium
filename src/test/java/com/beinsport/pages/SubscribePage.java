@@ -9,12 +9,14 @@ import java.util.List;
 
 public class SubscribePage extends AbstractPage {
 
-    public WebDriver driver;
+    protected WebDriver driver;
+    protected String testCase;
 
     //Abstracter
-    public SubscribePage(WebDriver driver) {
+    public SubscribePage(WebDriver driver, String testCase) {
         super(driver);
         this.driver = driver;
+        this.testCase = testCase;
 
     }
 

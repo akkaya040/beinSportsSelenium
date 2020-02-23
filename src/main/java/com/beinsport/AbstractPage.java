@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class AbstractPage {
@@ -24,7 +25,7 @@ public class AbstractPage {
     public static final int DEFAULT_WAIT_LOADERBOX = 90;
     public static final Logger log = (Logger) LogManager.getLogger(AbstractPage.class.getName());
 
-    public AbstractPage(WebDriver driver){
+    public AbstractPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, DEFAULT_WAIT);
         this.waitZero = new WebDriverWait(driver, 0);
@@ -35,7 +36,7 @@ public class AbstractPage {
         this.driver = driver;
     }
 
-    public WebDriver getAbstractDriver(){
+    public WebDriver getAbstractDriver() {
         return this.driver;
     }
 
@@ -44,11 +45,13 @@ public class AbstractPage {
         try {
             driver.get(url);
             driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-            //Wait(100);
-            log.info("Web application launched");
 
+            log.info("Web application launched");
+            LogINFO("Web application launched");
         } catch (Exception e) {
+
             log.error("Error while getting app url : " + e);
+            LogERROR("Error while getting app url : " + e);
 
             throw new RuntimeException(e);
         }
@@ -138,7 +141,6 @@ public class AbstractPage {
     protected void click(WebElement element) throws InterruptedException {
 
         try {
-
             element.click();
         } catch (Exception e) {
             log.error("Error while clicking webelement : " + e);
@@ -147,6 +149,43 @@ public class AbstractPage {
             throw new RuntimeException(e);
         }
     }
+
+    protected void sendKeys(By by, String text) throws InterruptedException {
+        WebElement element = null;
+        String elemText = "";
+        try {
+            element = findElement(by);
+            if (element.isEnabled()) {
+                elemText = element.getText();
+                element.sendKeys(text);
+                LogINFO("Text: '"+text + "' filled to Field: "+elemText );
+            }
+        } catch (Exception e) {
+            log.error("Error while filling field : " + e);
+            LogFAIL("Error while filling field : " + e);
+
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void sendKeys(WebElement element, String text) throws InterruptedException {
+        String elemText = "";
+
+        try {
+            if (element.isEnabled()) {
+                elemText = element.getText();
+                element.sendKeys(text);
+                LogINFO("Text: '"+text + "' filled to Field: "+elemText );
+            }
+
+        } catch (Exception e) {
+            log.error("Error while filling field : " + e);
+            LogFAIL("Error while filling field : " + e);
+
+            throw new RuntimeException(e);
+        }
+    }
+
 
     protected boolean isElementExist(By by) {
         return isElementExist(by, 15);
@@ -159,6 +198,19 @@ public class AbstractPage {
         driver.manage().timeouts().implicitlyWait(DEFAULT_WAIT, TimeUnit.SECONDS);
 
         return isExist;
+    }
+
+    public int getRandomNumberInRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
+
+    public String getRandomMail(){
+        String tail = "@gmail.com";
+        String head = "kurtulus";
+        String rand = String.valueOf(getRandomNumberInRange(100000,999999));
+
+        return head + rand + tail ;
     }
 
 
@@ -185,8 +237,8 @@ public class AbstractPage {
     }
 
     public void LogERROR(String massege) {
-         log.error(massege);
-         System.out.println(massege);
+        log.error(massege);
+        System.out.println(massege);
     }
 
     public void LogINFO(String massege) {
